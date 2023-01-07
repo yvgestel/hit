@@ -1,0 +1,53 @@
+.dropbox-item {
+    background-color: var(--grey);
+    margin-top: 2rem;
+    border: var(--grey) solid 3px;
+    border-radius: 25px;
+}
+
+.dropbox-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem 0;
+}
+
+.dropbox-title {
+    font-size: 1.75rem;
+    color: var(--light-grey);
+}
+
+.dropbox-list-container {
+    display: none;
+}
+
+.dropdown-item-box {
+    display: flex;
+    justify-content: center;
+}
+
+.dropdown-icon {
+    height: 0;
+    width: 0;
+    border: 1.25rem solid;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: var(--light-grey);   
+    transition: all 0.5s;
+}
+
+.dropdown-icon.active-dropdown {
+    transform:rotateZ(90deg);
+}
+
+.dropbox-list-container {
+    display: none;
+}
+
+.dropbox-list-container.active-dropdown {
+    display: block;
+    border-top: var(--black) solid 3px;
+    margin: 0 1rem;
+    text-align: left;
+}

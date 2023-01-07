@@ -1,0 +1,52 @@
+button {
+    font-size: 1rem;
+    margin: 0.5rem auto;
+    width: fit-content;
+    cursor: pointer;
+    font-family: Myanmar Text;
+}
+
+.btn-pri {
+    background-color: var(--orange);
+    color: var(--white);
+    border: 3px solid var(--orange);
+    border-radius: 50px;
+    padding: 0.25rem 2rem;
+    font-weight: bold;
+    transition: 0.5s;
+    display: inline-block;
+    position: relative;
+}
+
+.btn-sec {
+    background-color: transparent;
+    color: var(--light-grey);
+    border: 3px solid var(--grey);
+    border-radius: 50px;
+    padding: 0.25rem 1.5rem;
+    font-weight: bolder;
+    transition: 0.5s;
+}
+
+.btn-ter {
+    font-size: 0.75rem;
+    background-color: transparent;
+    color: var(--light-grey);
+    border: none;
+    border-bottom: 2px solid var(--grey);
+    transition: 0.5s;
+}
+
+.btn-pri:hover {
+    color: var(--grey);
+}
+
+.btn-sec:hover {
+    color: var(--white);
+    border: 3px solid var(--grey)
+}
+
+.btn-ter:hover {
+    color: var(--white);
+    border-bottom: 2px solid var(--white);
+}

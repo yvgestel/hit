@@ -1,0 +1,109 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 7rem;
+    padding-left: 1rem;
+    padding-top: 2rem;
+}
+
+header.active-menu {
+    border-bottom: 3px solid var(--grey);
+}
+
+.hamburger-menu-container {
+    margin: 1rem 3rem;
+    cursor: pointer;
+}
+
+.hamburger-menu {
+    top: 50%;
+    width: 36px;
+    height: 4px;
+    background: var(--white);
+    position: relative;
+    transition: 0.5s;
+    margin-bottom: 1.5rem;
+}
+
+.hamburger-menu::before {
+    top: -11px;
+    left: 0;
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 4px;
+    background: var(--white);
+    transition: 0.5s;
+}
+
+.hamburger-menu::after {
+    top: 11px;
+    left: 0;
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 4px;
+    background: var(--white);
+    transition: 0.5s;
+}
+
+.hamburger-menu-container.active-menu .hamburger-menu {
+    background-color: var(--black);
+}
+
+.hamburger-menu-container.active-menu .hamburger-menu::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.hamburger-menu-container.active-menu .hamburger-menu::after {
+    top: 0;
+    transform: rotate(135deg);    
+}
+
+.hit-logo {
+    width: 10rem;
+    height: 10rem;
+    filter: invert(100%);
+}
+
+.hit-logo:hover {
+    cursor: pointer;
+}
+
+nav {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+nav ul {
+    height: calc(100vh - 7rem - 3px);
+    width: 100%;
+    display: none;
+    position: absolute;
+    z-index: 99;
+    padding: 0;
+}
+
+nav.active-menu ul {
+    display: block;
+}
+
+nav ul li {
+    height: 2rem;
+    background-color: var(--black);
+    border-bottom: 3px solid var(--grey);
+    padding: 1rem;
+    text-align: center;
+    line-height: 2rem;
+    white-space: nowrap;
+}
+
+.link {
+    color: var(--white);
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: inline-block;
+}
