@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/hit/static/css/main.12841207.css",
+    "main.js": "/hit/static/js/main.ba704dae.js",
+    "static/media/hit-logo.svg": "/hit/static/media/hit-logo.d775c291ebd718d36b3f76a05cb1eba3.svg",
+    "index.html": "/hit/index.html",
+    "main.12841207.css.map": "/hit/static/css/main.12841207.css.map",
+    "main.ba704dae.js.map": "/hit/static/js/main.ba704dae.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.12841207.css",
+    "static/js/main.ba704dae.js"
+  ]
+}
