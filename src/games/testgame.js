@@ -48,12 +48,8 @@ export const TestGame = () => {
     }
 
     useEffect(() => {
-        const screenWidth = document.getElementById('game-container').offsetWidth
-        const screenWidth2 = window.screen.width
-        const screenWidth3 = window.innerWidth
-        const screenWidth4 = window.screen.availWidth
-        const screenHeight = document.getElementById('game-container').offsetHeight
-        console.log("width: "+screenWidth+" "+screenWidth2+" "+screenWidth3+" "+screenWidth4)
+        const screenWidth = window.innerWidth
+        const screenHeight = window.innerHeight
         getVideo(screenWidth, screenHeight)
     }, [videoRef])
 
