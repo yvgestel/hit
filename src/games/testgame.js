@@ -35,7 +35,6 @@ export const TestGame = () => {
     //   }, []);
 
     const getVideo = (screenWidth, screenHeight) => {
-        console.log('getvideo')
         navigator.mediaDevices.getUserMedia({
             video: {width: screenWidth, height: screenHeight}
         }).then(stream => {
@@ -48,8 +47,10 @@ export const TestGame = () => {
     }
 
     useEffect(() => {
-        const screenWidth = window.innerWidth
-        const screenHeight = window.innerHeight
+        //const screenWidth = window.screen.width * ratio
+        const screenWidth = (window.innerWidth > 0) ? window.innerWidth :window.screen.width;
+        alert(screenWidth)
+        const screenHeight = window.screen.height
         getVideo(screenWidth, screenHeight)
     }, [videoRef])
 
