@@ -47,10 +47,8 @@ export const TestGame = () => {
     }
 
     useEffect(() => {
-        //const screenWidth = window.screen.width * ratio
         const screenWidth = (window.innerWidth > 0) ? window.innerWidth :window.screen.width;
-        alert(screenWidth)
-        const screenHeight = window.screen.height
+        const screenHeight = (window.innerHeight > 0) ? window.innerHeight :window.screen.height;
         getVideo(screenWidth, screenHeight)
     }, [videoRef])
 
