@@ -1,9 +1,18 @@
 import React, { useEffect, useRef } from 'react';
+import useWindowResize from '../hooks/useWindowResize'
 import * as THREE from 'three';
 import './testgame.css';
 
 export const TestGame = () => {
+    const { screenWidth, screenHeight } = useWindowResize()
     const videoRef = useRef(null)
+
+    // const videoElement = document.getElementById('video-container')
+    // const rect = videoElement.getBoundingClientRect()
+    // const width = rect.width > rect.height ? rect.width : rect.height
+    // const height = rect.width > rect.height ? rect.height : rect.width
+    // console.log(width, height)
+
     // useEffect(() => {
     //     const scene = new THREE.Scene()
 
@@ -34,7 +43,8 @@ export const TestGame = () => {
 
     //   }, []);
 
-    const getVideo = (screenWidth, screenHeight) => {
+    const getVideo = (screenHeight, screenWidth) => {
+        console.log(screenHeight, screenWidth)
         navigator.mediaDevices.getUserMedia({
             video: {width: screenWidth, height: screenHeight}
         }).then(stream => {
@@ -47,10 +57,8 @@ export const TestGame = () => {
     }
 
     useEffect(() => {
-        const screenWidth = (window.innerWidth > 0) ? window.innerWidth :window.screen.width;
-        const screenHeight = (window.innerHeight > 0) ? window.innerHeight :window.screen.height;
-        getVideo(screenWidth, screenHeight)
-    }, [videoRef])
+        getVideo(screenHeight, screenWidth)
+    }, [videoRef,screenHeight, screenWidth])
 
     return (
         <div className='game-page-container'>
