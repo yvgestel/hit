@@ -7,48 +7,14 @@ export const TestGame = () => {
     const { screenWidth, screenHeight } = useWindowResize()
     const videoRef = useRef(null)
 
-    // const videoElement = document.getElementById('video-container')
-    // const rect = videoElement.getBoundingClientRect()
-    // const width = rect.width > rect.height ? rect.width : rect.height
-    // const height = rect.width > rect.height ? rect.height : rect.width
-    // console.log(width, height)
-
-    // useEffect(() => {
-    //     const scene = new THREE.Scene()
-
-    //     const geometry = new THREE.BoxGeometry(1, 1, 1)
-    //     const material = new THREE.MeshBasicMaterial({color: '#0000FF'})
-    //     const cube = new THREE.Mesh(geometry, material)
-
-    //     scene.add(cube)
-    //     cube.position.set(0 , 0, -2)
-    //     cube.rotation.set(0, Math.PI/4, 0)
-
-    //     const camera = new THREE.PerspectiveCamera()
-    //     camera.position.set(1, 1, 5)
-
-    //     const renderer = new THREE.WebGLRenderer({alpha: true})
-    //     const width = document.getElementById('game-container').offsetWidth
-    //     const height = document.getElementById('game-container').offsetHeight
-    //     renderer.setSize(width, height)
-    //     renderer.render(scene, camera)
-
-    //     const video = document.getElementById('video-container')
-    //     navigator.mediaDevices.getUserMedia({video: true}).then((stream) => {
-    //         video.srcObject = stream
-    //         video.play()
-    //     })
-
-    //     document.getElementById('game-container').appendChild(renderer.domElement)
-
-    //   }, []);
-
     const getVideo = (screenHeight, screenWidth) => {
+        let video = videoRef.current
         console.log(screenHeight, screenWidth)
+        console.log(video.getBoundingClientRect())
         navigator.mediaDevices.getUserMedia({
-            video: {width: screenWidth, height: screenHeight}
+            video: {width: video.getBoundingClientRect().width, height: video.getBoundingClientRect().height}
         }).then(stream => {
-            let video = videoRef.current
+            //let video = videoRef.current
             video.srcObject = stream
             video.play()
         }).catch(err => {
