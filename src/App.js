@@ -10,7 +10,7 @@ import { PrivateRoute } from './components/atoms/privateRoute/privateRoute';
 import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { Game } from './pages/game/game';
-import { TestGame } from './games/testgame';
+import { TestGame } from './games/testgame2';
 
 function App() {
   return (
