@@ -11,7 +11,6 @@ import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { Game } from './pages/game/game';
 import { TestGame } from './games/testgame';
-import { Component } from './test/test';
 
 function App() {
   return (
@@ -29,10 +28,6 @@ function App() {
             <Route 
               path='/startgame'
               element={<TestGame />}
-            />
-            <Route 
-              path='/test'
-              element={<Component />}
             />
             <Route
               path="/game"

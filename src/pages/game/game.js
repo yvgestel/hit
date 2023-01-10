@@ -15,10 +15,6 @@ export const Game = () => {
     const startGame = () => {
         navigate('/startgame')
     }
-    
-    const startTest = () => {
-        navigate('/test')
-    }
 
     return (
         <div className='game-starter-container'>            
@@ -38,13 +34,6 @@ export const Game = () => {
                 onClick={startGame}
             > 
                 Let's play!
-            </Button>
-            <Button 
-                type='submit'
-                className='btn-pri'
-                onClick={startTest}
-            > 
-                Test
             </Button>
             <Button 
                 type='submit'
