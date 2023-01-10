@@ -14,6 +14,7 @@ export const TestGame = () => {
         navigator.mediaDevices.getUserMedia({
             video: {width: screenWidth, height: screenHeight}
         }).then(stream => {
+            video.srcObject = stream
             video.play()
         }).catch(err => {
             console.error(err)
