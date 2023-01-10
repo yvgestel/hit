@@ -26,24 +26,31 @@ export const TestGame = () => {
 
     return (
         <div className='game-page-container'>
-            <Webcam
-                id='video-container'
-                className='video-container' 
-                audio={false}
-                width={screenHeight}
-                height={screenWidth}
-                ref={videoRef}
-                videoConstraints={{
+            <div 
+                style={{
                     width: screenWidth,
                     height: screenHeight,
-                    facingMode: "user"
-                  }}
-            />
-            <div 
-                id='game-container'
-                className='game-container'
-            />
+                }}
+            >
+                <p>{screenHeight}+' '+{screenWidth}</p>
+            </div>
         </div>
 
     )
 }
+
+// {/* <Webcam
+// id='video-container'
+// className='video-container' 
+// audio={false}
+// ref={videoRef}
+// videoConstraints={{
+//     width: screenWidth,
+//     height: screenHeight,
+//     facingMode: "user"
+//   }}
+// />
+// <div 
+// id='game-container'
+// className='game-container'
+// /> */}
