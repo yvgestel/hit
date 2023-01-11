@@ -1,16 +1,10 @@
 .game-page-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
+    display: grid;
 }
 
 .game-container, .video-container{
-    position: absolute; 
-    top: 0; 
-    left: 0;
-  }
-
-  .game-container {
+    grid-column: 1;
+    grid-row: 1;
     width: 100%;
     height: 100vh;
   }
