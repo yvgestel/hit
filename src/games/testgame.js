@@ -9,8 +9,6 @@ export const TestGame = () => {
 
     const getVideo = (screenHeight, screenWidth) => {
         let video = videoRef.current
-        video.setAttribute('width', screenWidth);
-        video.setAttribute('height', screenHeight);
         navigator.mediaDevices.getUserMedia({
             video: {width: screenWidth, height: screenHeight}
         }).then(stream => {
