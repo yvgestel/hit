@@ -1,15 +1,11 @@
 .game-page-container {
-    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
 }
 
-.game-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.video-container{
-    z-index: 9;
-}
+.game-container, .video-container{
+    grid-row-start: 1;
+    grid-column-start: 1;
+  }
 
   

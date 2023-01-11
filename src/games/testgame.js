@@ -28,8 +28,8 @@ export const TestGame = () => {
     return (
         <div className='game-page-container'>
             <video
-                id='game-container'
-                className='game-container'
+                id='video-container'
+                className='video-container'
                 ref={videoRef}
             /> 
             <div 
