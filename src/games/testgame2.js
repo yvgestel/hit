@@ -36,7 +36,9 @@ export const TestGame = () => {
             <div 
                 id='game-container'
                 className='game-container'
-            />  
+            >
+                <h1>Test</h1>
+            </div>  
         </div>
 
     )
