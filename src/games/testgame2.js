@@ -33,13 +33,13 @@ export const TestGame = () => {
                 facingMode='user'
                 aspectRatio='cover'
             />
+            <div 
+                id='game-container'
+                className='game-container'
+            />  
         </div>
 
     )
 }
 
 
-// <div 
-// id='game-container'
-// className='game-container'
-// />  
