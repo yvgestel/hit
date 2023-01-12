@@ -30,15 +30,15 @@ export const TestGame = () => {
                 className='video-container'
                 ref={videoRef}
             /> 
+            <div 
+                id='game-container'
+                className='game-container'
+            >
+                <h1>Test</h1>
+            </div>  
         </div>
 
     )
 }
 
 
-// {/* <div 
-// id='game-container'
-// className='game-container'
-// >
-// <h1>Test</h1>
-// </div>   */}
