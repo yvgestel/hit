@@ -17,3 +17,7 @@
     height: 100vh;
     z-index: 9;
   }
+
+  .text-zwart {
+    color: red;
+  }
