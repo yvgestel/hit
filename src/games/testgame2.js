@@ -26,6 +26,12 @@ export const TestGame = () => {
 
     return (
         <div className='game-page-container'>
+            <div 
+                id='game-container'
+                className='game-container'
+            >
+                <h1>Test</h1>
+            </div>  
             <Camera 
                 id='video-container'
                 className='video-container'
@@ -33,12 +39,7 @@ export const TestGame = () => {
                 facingMode='user'
                 aspectRatio='cover'
             />
-            <div 
-                id='game-container'
-                className='game-container'
-            >
-                <h1>Test</h1>
-            </div>  
+
         </div>
 
     )
