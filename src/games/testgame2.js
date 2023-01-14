@@ -32,13 +32,17 @@ export const TestGame = () => {
 
         const camera = new THREE.PerspectiveCamera()
         camera.position.set(1, 1, 5)
+        camera.aspect = screenWidth / screenHeight;
+        camera.updateProjectionMatrix();
 
         const renderer = new THREE.WebGLRenderer({
             alpha: true,
             canvas: document.getElementById('game-container'),
+            antialias: true,
         })
+        renderer.setPixelRatio(window.devicePixelRatio)
         renderer.render(scene, camera)
-    },[])
+    },[screenWidth, screenHeight])
 
     // useEffect(() => {
     //     getVideo(screenHeight, screenWidth)
