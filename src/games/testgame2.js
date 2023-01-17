@@ -30,10 +30,8 @@ export const TestGame = () => {
         cube.position.set(0, 0, -2)
         cube.rotation.set(0, Math.PI/4, 0)
 
-        const camera = new THREE.PerspectiveCamera()
+        const camera = new THREE.PerspectiveCamera(75, screenWidth / screenHeight, 0.1, 1000)
         camera.position.set(1, 1, 5)
-        camera.aspect = screenWidth / screenHeight;
-        camera.updateProjectionMatrix();
 
         const renderer = new THREE.WebGLRenderer({
             alpha: true,
@@ -41,7 +39,18 @@ export const TestGame = () => {
             antialias: true,
         })
         renderer.setPixelRatio(window.devicePixelRatio)
-        renderer.render(scene, camera)
+
+        const animate = () => {
+            requestAnimationFrame( animate )
+            cube.rotation.x += 0.01
+            cube.rotation.y += 0.005
+            cube.rotation.z += 0.01
+
+            renderer.render(scene, camera)
+        }
+
+        animate() 
+
     },[screenWidth, screenHeight])
 
     // useEffect(() => {
