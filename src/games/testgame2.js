@@ -8,17 +8,17 @@ export const TestGame = () => {
     const { screenWidth, screenHeight } = useWindowResize()
     const videoRef = useRef(null)
 
-    const getVideo = (screenHeight, screenWidth) => {
-        navigator.mediaDevices.getUserMedia({
-            video: {width: screenWidth, height: screenHeight}
-        }).then(stream => {
-            let video = videoRef.current
-            video.srcObject = stream
-            video.play()
-        }).catch(err => {
-            console.error(err)
-        })
-    }
+    // const getVideo = (screenHeight, screenWidth) => {
+    //     navigator.mediaDevices.getUserMedia({
+    //         video: {width: screenWidth, height: screenHeight}
+    //     }).then(stream => {
+    //         let video = videoRef.current
+    //         video.srcObject = stream
+    //         video.play()
+    //     }).catch(err => {
+    //         console.error(err)
+    //     })
+    // }
 
     useEffect(() => {
         const scene = new THREE.Scene()
