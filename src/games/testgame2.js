@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import useWindowResize from '../hooks/useWindowResize'
 import { Camera } from "react-camera-pro";
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
+import { Line2 } from 'three/examples/jsm/lines/Line2'
 import * as THREE from 'three';
 
 import './testgame.css';
@@ -24,12 +27,20 @@ export const TestGame = () => {
     useEffect(() => {
         const scene = new THREE.Scene()
 
-        const geometry = new THREE.PlaneGeometry( 2, 2 )
-        const edges = new THREE.EdgesGeometry( geometry )
-        const material = new THREE.LineBasicMaterial( { color: 0xF26419 } )
-        const plane = new THREE.LineSegments( edges, material)
-        scene.add( plane )
-        plane.position.set(0, 0, -2)
+        const geometry = new LineGeometry();
+        geometry.setPositions([ 1, 1, 0, 1, 2, 0, 2, 2, 0, 2, 1, 0, 1, 1, 0 ]); // [ x1, y1, z1,  x2, y2, z2, ... ] format
+        const material = new LineMaterial({
+            color: 'green',
+            linewidth: 5, // px
+            resolution: new THREE.Vector2(screenWidth, screenHeight) // resolution of the viewport
+        });
+
+        console.log(material)
+
+        const myLine = new Line2(geometry, material);
+        scene.add(myLine)
+
+        myLine.computeLineDistances();
 
         const camera = new THREE.PerspectiveCamera(75, screenWidth / screenHeight, 0.1, 1000)
         camera.position.set(1, 1, 5)
