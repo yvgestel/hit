@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import useWindowResize from '../hooks/useWindowResize'
 import { Camera } from "react-camera-pro";
 import * as THREE from 'three';
+
 import './testgame.css';
 
 export const TestGame = () => {
@@ -22,13 +23,13 @@ export const TestGame = () => {
 
     useEffect(() => {
         const scene = new THREE.Scene()
-        const geometry = new THREE.BoxGeometry(1, 1, 1)
-        const material = new THREE.MeshBasicMaterial({color: '#0000FF'})
-        const cube = new THREE.Mesh(geometry, material)
 
-        scene.add(cube)
-        cube.position.set(0, 0, -2)
-        cube.rotation.set(0, Math.PI/4, 0)
+        const geometry = new THREE.PlaneGeometry( 2, 2 )
+        const edges = new THREE.EdgesGeometry( geometry )
+        const material = new THREE.LineBasicMaterial( { color: 0xF26419 } )
+        const plane = new THREE.LineSegments( edges, material)
+        scene.add( plane )
+        plane.position.set(0, 0, -2)
 
         const camera = new THREE.PerspectiveCamera(75, screenWidth / screenHeight, 0.1, 1000)
         camera.position.set(1, 1, 5)
@@ -42,9 +43,6 @@ export const TestGame = () => {
 
         const animate = () => {
             requestAnimationFrame( animate )
-            cube.rotation.x += 0.01
-            cube.rotation.y += 0.005
-            cube.rotation.z += 0.01
 
             renderer.render(scene, camera)
         }
