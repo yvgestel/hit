@@ -7,8 +7,8 @@ import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
 import * as THREE from 'three';
 
-//import * as tf from '@tensorflow/tfjs'
-//import * as handpose from '@tensorflow-models/handpose'
+import * as tf from '@tensorflow/tfjs'
+import * as handpose from '@tensorflow-models/handpose'
 
 import './testgame.css';
 
@@ -18,19 +18,20 @@ export const TestGame = () => {
     const canvasRef = useRef(null)
     console.log(screenRatio)
 
-    // const runHandpose = async () => {
-    //     const net = await handpose.load()
-    //     console.log('handpose loaded')
-    //     detect(net)
-    // }
-
-    const detect = async (net) => {
-        let video = videoRef.current
-       // const hand = await net.estimateHands(videoRef)
-        console.log(video)
+    const runHandpose = async () => {
+        const net = await handpose.load()
+        console.log('handpose loaded')
+        //detect(net)
     }
 
-    // runHandpose()
+    const detect = async (net) => {
+        console.log(videoRef)
+        let video = videoRef.current.video
+        const hand = await net.estimateHands(video)
+        console.log(hand)
+    }
+
+    runHandpose()
 
     useEffect(() => {
         let handDetected
@@ -81,7 +82,12 @@ export const TestGame = () => {
         <Webcam 
             height={screenHeight} 
             width={screenWidth}
-            videoConstraints={{facingMode: 'user', aspectRatio: screenRatio}}
+            videoConstraints={{
+                facingMode: 'user', 
+                aspectRatio: screenRatio,
+                width: screenWidth,
+                height: screenHeight,
+            }}
             ref={videoRef} 
         />
         </div>
