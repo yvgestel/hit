@@ -7,8 +7,8 @@ import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
 import * as THREE from 'three';
 
-import * as tf from '@tensorflow/tfjs'
-import * as handpose from '@tensorflow-models/handpose'
+//import * as tf from '@tensorflow/tfjs'
+//import * as handpose from '@tensorflow-models/handpose'
 
 import './testgame.css';
 
@@ -18,11 +18,11 @@ export const TestGame = () => {
     const canvasRef = useRef(null)
     console.log(screenRatio)
 
-    const runHandpose = async () => {
-        const net = await handpose.load()
-        console.log('handpose loaded')
-        detect(net)
-    }
+    // const runHandpose = async () => {
+    //     const net = await handpose.load()
+    //     console.log('handpose loaded')
+    //     detect(net)
+    // }
 
     const detect = async (net) => {
         let video = videoRef.current
@@ -30,7 +30,7 @@ export const TestGame = () => {
         console.log(video)
     }
 
-    runHandpose()
+    // runHandpose()
 
     useEffect(() => {
         let handDetected
