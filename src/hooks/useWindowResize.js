@@ -4,15 +4,15 @@ function useWindowResize() {
   const [windowSize, setWindowSize] = useState({
     screenWidth: window.innerWidth,
     screenHeight: window.innerHeight,
-    screenRatio: null,
+    screenRatio: window.innerWidth / window.innerHeight,
   });
 
   useEffect(() => {
     function handleResize() {
       const isLandscape = window.innerHeight <= window.innerWidth;
       const ratio = isLandscape ? 
-        window.innerHeight / window.innerWidth : 
-        window.innerWidth / window.innerHeight
+        window.innerWidth / window.innerHeight: 
+        window.innerHeight / window.innerWidth 
       // console.log(isLandscape)
       // console.log(ratio)
         setWindowSize({
