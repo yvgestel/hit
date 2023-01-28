@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useWindowResize from '../hooks/useWindowResize'
 //import { Camera } from "react-camera-pro";
 import Webcam from "react-webcam";
@@ -14,40 +14,62 @@ import './testgame.css';
 
 export const TestGame = () => {
     const { screenWidth, screenHeight, screenRatio } = useWindowResize()
+    const [handDetected, sethandDetected] = useState(false)
     const videoRef = useRef(null)
     const canvasRef = useRef(null)
-    console.log(screenRatio)
 
     const runHandpose = async () => {
         const net = await handpose.load()
-        console.log('handpose loaded')
-        //detect(net)
-    }
+        console.log("Handpose model loaded.");
+        //  Loop and detect hands
+        setInterval(() => {
+            detectHand(net);
+        }, 50);
+      };
 
-    const detect = async (net) => {
-        console.log(videoRef)
-        let video = videoRef.current.video
-        const hand = await net.estimateHands(video)
-        console.log(hand)
-    }
-
-    runHandpose()
+    const detectHand = async (net) => {
+        if (
+            typeof videoRef.current !== "undefined" &&
+            videoRef.current !== null &&
+            videoRef.current.video.readyState === 4
+          ) {
+            // Get Video Properties
+            const video = videoRef.current.video;
+            const videoWidth = videoRef.current.video.videoWidth;
+            const videoHeight = videoRef.current.video.videoHeight;
+      
+            // Set video width
+            videoRef.current.video.width = videoWidth;
+            videoRef.current.video.height = videoHeight;
+      
+            // Set canvas height and width
+            canvasRef.current.width = videoWidth;
+            canvasRef.current.height = videoHeight;
+      
+            // Make Detections
+            const hand = await net.estimateHands(video);
+            sethandDetected(hand.length > 0 ? true : false)
+            console.log(handDetected);
+    }}
 
     useEffect(() => {
-        let handDetected
-        const color = handDetected ? 'green' : 'red'
+        runHandpose()
+    },[])
+
+    useEffect(() => {
+        const color = handDetected ? '#49be25' : '#be4d25'
 
         const scene = new THREE.Scene()
 
         const geometry = new LineGeometry();
         geometry.setPositions([ 1, 1, 0, 1, 2, 0, 2, 2, 0, 2, 1, 0, 1, 1, 0 ]); // [ x1, y1, z1,  x2, y2, z2, ... ] format
         const material = new LineMaterial({
-            color: { color },
             linewidth: 5, // px
             resolution: new THREE.Vector2(screenWidth, screenHeight) // resolution of the viewport
         });
 
         const plane = new Line2(geometry, material);
+        plane.material.color.set(color)
         scene.add(plane)
 
         plane.computeLineDistances()
@@ -70,7 +92,7 @@ export const TestGame = () => {
 
         animate() 
 
-    },[screenWidth, screenHeight])
+    },[screenWidth, screenHeight, handDetected])
 
     return (
         <div className='game-page-container'>
@@ -101,4 +123,4 @@ className='video-container'
 ref={videoRef}
 facingMode='user'
 aspectRatio='cover'
-/> */}
+/>  */}
