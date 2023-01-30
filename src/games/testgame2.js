@@ -8,56 +8,56 @@ import { Line2 } from 'three/examples/jsm/lines/Line2'
 import * as THREE from 'three';
 
 import * as tf from '@tensorflow/tfjs'
-import * as handpose from '@tensorflow-models/handpose'
+import * as posenet from '@tensorflow-models/posenet'
 
 import './testgame.css';
 
 export const TestGame = () => {
     const { screenWidth, screenHeight, screenRatio } = useWindowResize()
-    const [handDetected, sethandDetected] = useState(false)
+    const [prediction, setPrediction] = useState(null);
     const videoRef = useRef(null)
     const canvasRef = useRef(null)
 
-    const runHandpose = async () => {
-        const net = await handpose.load()
-        console.log("Handpose model loaded.");
-        //  Loop and detect hands
-        setInterval(() => {
-            detectHand(net);
-        }, 50);
+    const detectWebcamFeed = async (posenet_model) => {
+        if (
+          typeof videoRef.current !== "undefined" &&
+          videoRef.current !== null &&
+          videoRef.current.video.readyState === 4
+        ) {
+          // Get Video Properties
+          const video = videoRef.current.video;
+          const videoWidth = videoRef.current.video.videoWidth;
+          const videoHeight = videoRef.current.video.videoHeight;
+          // Set video width
+          videoRef.current.video.width = videoWidth;
+          videoRef.current.video.height = videoHeight;
+          // Make Estimation
+          const pose = await posenet_model.estimateSinglePose(video);
+          setPrediction(pose.score)
+        }
+        tf.dispose()
       };
 
-    const detectHand = async (net) => {
-        if (
-            typeof videoRef.current !== "undefined" &&
-            videoRef.current !== null &&
-            videoRef.current.video.readyState === 4
-          ) {
-            // Get Video Properties
-            const video = videoRef.current.video;
-            const videoWidth = videoRef.current.video.videoWidth;
-            const videoHeight = videoRef.current.video.videoHeight;
-      
-            // Set video width
-            videoRef.current.video.width = videoWidth;
-            videoRef.current.video.height = videoHeight;
-      
-            // Set canvas height and width
-            canvasRef.current.width = videoWidth;
-            canvasRef.current.height = videoHeight;
-      
-            // Make Detections
-            const hand = await net.estimateHands(video);
-            sethandDetected(hand.length > 0 ? true : false)
-            console.log(handDetected);
-    }}
+      const runPosenet = async () => {
+        const posenet_model = await posenet.load({
+          inputResolution: { width: screenWidth, height: screenHeight },
+          scale: 0.8
+        });
+        //
+        setInterval(() => {
+          detectWebcamFeed(posenet_model);
+        }, 200);
+      };
 
     useEffect(() => {
-        runHandpose()
-    },[])
+        tf.ready().then(() => {
+        runPosenet();
+        });
+        tf.dispose()
+    }, []);
 
     useEffect(() => {
-        const color = handDetected ? '#49be25' : '#be4d25'
+        const color = prediction>0.3 ? '#49be25' : '#be4d25'
 
         const scene = new THREE.Scene()
 
@@ -92,7 +92,7 @@ export const TestGame = () => {
 
         animate() 
 
-    },[screenWidth, screenHeight, handDetected])
+    },[screenWidth, screenHeight, prediction])
 
     return (
         <div className='game-page-container'>
@@ -124,3 +124,51 @@ ref={videoRef}
 facingMode='user'
 aspectRatio='cover'
 />  */}
+
+// const loadModel = async () => {
+//     try {
+//     const model = await posenet.load({
+//         inputResolution: {width:screenWidth, height: screenHeight},
+//         scale: 0.5
+//     }); // input parameters
+//     console.log(model)
+//     setModel(model);
+//     console.log(model)
+//     console.log("set loaded Model");
+//     } 
+//     catch (err) {
+//     console.log(err);
+//     console.log("failed load model");
+//     }
+// }
+    
+// useEffect(() => {
+//     tf.ready().then(() => {
+//     loadModel();
+//     });
+// }, []);
+
+
+// const detectPose = async () => {
+//     if (
+//         typeof videoRef.current !== "undefined" &&
+//         videoRef.current !== null &&
+//         videoRef.current.video.readyState === 4
+//       ) {
+//         // Get Video Properties
+//         const video = videoRef.current.video;
+//         const videoWidth = videoRef.current.video.videoWidth;
+//         const videoHeight = videoRef.current.video.videoHeight;
+  
+//         // Set video width
+//         videoRef.current.video.width = videoWidth;
+//         videoRef.current.video.height = videoHeight;
+  
+//         // Set canvas height and width
+//         canvasRef.current.width = videoWidth;
+//         canvasRef.current.height = videoHeight;
+  
+//         // Make Detections
+//         const detection = await model.estimateSinglePose(video)
+//         console.log(detection)
+// }}
