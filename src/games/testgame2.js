@@ -82,7 +82,7 @@ export const TestGame = () => {
             canvas: document.getElementById('game-container'),
             antialias: true,
         })
-        renderer.setPixelRatio(window.devicePixelRatio)
+        //renderer.setPixelRatio(window.devicePixelRatio)
 
         const animate = async () => {
             requestAnimationFrame( animate )

@@ -13,13 +13,20 @@ function useWindowResize() {
       const ratio = isLandscape ? 
         window.innerWidth / window.innerHeight: 
         window.innerHeight / window.innerWidth 
-      // console.log(isLandscape)
-      // console.log(ratio)
+
         setWindowSize({
           screenWidth: window.innerWidth,
           screenHeight: window.innerHeight,
           screenRatio: ratio
         });
+
+        console.log('resize')
+        console.log(window.innerWidth)
+        console.log(window.innerHeight)
+        console.log(window.devicePixelRatio)
+        console.log(isLandscape)
+        console.log(ratio)
+
     }
 
     window.addEventListener("resize", handleResize);
