@@ -48,13 +48,11 @@ export const TestGame = () => {
     }
 
     const goBack = () => {
-      console.log(window.history)
-      if (window.history.state && window.history.state.idx > 0) {
-        navigate(-1);
-    } else {
+      try {
+        navigate(-1)
+      } catch (error) {
         navigate('/', { replace: true }); 
-        // the current entry in the history stack will be replaced with the new one with { replace: true }
-    }
+      }
     }
 
     useEffect(() => {
