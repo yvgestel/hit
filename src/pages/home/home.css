@@ -1,0 +1,8 @@
+.welcome-text {
+    margin: 0;
+    padding-top: 0.5rem;
+    color: var(--light-grey);
+    font-size: 1.5rem;
+    font-weight: bold;
+    word-wrap: break-word;
+}

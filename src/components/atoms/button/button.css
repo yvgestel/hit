@@ -37,6 +37,14 @@ button {
     transition: 0.5s;
 }
 
+.btn-plain {
+    font-size: 0.75rem;
+    background-color: transparent;
+    color: var(--light-grey);
+    border: none;
+    transition: 0.5s;
+}
+
 .btn-pri:hover {
     color: var(--grey);
 }
@@ -49,4 +57,8 @@ button {
 .btn-ter:hover {
     color: var(--white);
     border-bottom: 2px solid var(--white);
+}
+
+.btn-plain:hover {
+    color: var(--white);
 }

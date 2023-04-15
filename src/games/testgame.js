@@ -1,61 +1,92 @@
-import React, { useEffect, useRef } from 'react';
-import useWindowResize from '../hooks/useWindowResize'
-import * as THREE from 'three';
+import React, { useEffect, useRef, useState } from 'react';
+import Measure from 'react-measure'
+import { useUserMedia } from '../hooks/useUserMedia';
+import { useCardRatio } from '../hooks/useCardRatio';
+import { useOffsets } from '../hooks/useOffsets';
+
+import { Icon } from '../components/atoms/icon/icon';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
 import './testgame.css';
 
+const CAPTURE_OPTIONS = {
+    audio: false,
+    video: { facingMode: "environment" },
+};
+
 export const TestGame = () => {
-    const { screenWidth, screenHeight } = useWindowResize()
     const videoRef = useRef(null)
     const canvasRef = useRef(null)
+    const mediaStream = useUserMedia(CAPTURE_OPTIONS)
+    const [container, setContainer] = useState({ height: 0, width: 0 });
+    const [aspectRatio, calculateRatio] = useCardRatio(1.586);
+    const offsets = useOffsets(
+      videoRef.current && videoRef.current.videoWidth,
+      videoRef.current && videoRef.current.videoHeight,
+      container.width,
+      container.height
+    );
 
-    const getVideo = (screenHeight, screenWidth) => {
-        let video = videoRef.current
-        navigator.mediaDevices.getUserMedia({
-            video: {width: screenWidth, height: screenHeight}
-        }).then(stream => {
-            video.srcObject = stream
-            video.play()
-        }).catch(err => {
-            console.error(err)
-        })
+    console.log(offsets)
+
+    if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
+        videoRef.current.srcObject = mediaStream;
+    }
+
+    function handleCanPlay() {
+        calculateRatio(videoRef.current.videoHeight, videoRef.current.videoWidth);
+        videoRef.current.play();
+    }
+
+    function handleResize(contentRect) {
+        setContainer({
+            height: Math.round(contentRect.bounds.width / aspectRatio),
+            width: contentRect.bounds.width
+          });
+    }
+
+    const goBack = () => {
+      console.log('Go back')
     }
 
     useEffect(() => {
-        const scene = new THREE.Scene()
-        const geometry = new THREE.BoxGeometry(1, 1, 1)
-        const material = new THREE.MeshBasicMaterial({color: '#0000FF'})
-        const cube = new THREE.Mesh(geometry, material)
-
-        scene.add(cube)
-        cube.position.set(0, 0, -2)
-        cube.rotation.set(0, Math.PI/4, 0)
-
-        const camera = new THREE.PerspectiveCamera()
-        camera.position.set(1, 1, 5)
-
-        const renderer = canvasRef.current
-        renderer.render(scene, camera)
     },[])
 
-    useEffect(() => {
-        getVideo(screenHeight, screenWidth)
-    }, [videoRef,screenHeight, screenWidth])
-
     return (
-        <div className='game-page-container'>
-            <canvas 
-                id='game-container'
-                className='game-container'
-                ref={canvasRef}
-            />  
-            <video
-                id='video-container'
-                className='video-container'
-                ref={videoRef}
-            /> 
-        </div>
+        <Measure 
+            bounds 
+            onResize={handleResize}
+        >
+            {({measureRef}) => (
+                <div 
+                    className='game-page-container'
+                    ref={measureRef}
+                >
+                    <div className='back-from-game-icon'>
+                        <Icon 
+                        onClick={goBack}
+                        icon={faArrowLeft}
+                        />
+                    </div>
+                    <canvas 
+                        id='game-container'
+                        className='game-container'
+                        ref={canvasRef}
+                    />
+                    <video
+                        id='video-container'
+                        className='video-container'
+                        ref={videoRef}
+                        onCanPlay={handleCanPlay}
+                        autoPlay
+                        playsInline
+                        muted
+                    />
+                </div>
+            )}
+        </Measure>
+
 
     )
 }
-
 

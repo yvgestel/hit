@@ -1,14 +1,17 @@
 import React from "react";
 import './input.css'
 
-export const Input = ({ register, name, type, onFocus, ...rest }) => {
+export const Input = ({ register, validationSchema, name, type, onFocus, placeholder, ...rest }) => {
   return (
-    <input
+    <>
+      <input
         type={type} 
         onFocus={onFocus}
-        {...register(name)} 
+        placeholder={placeholder}
+        {...register(name, validationSchema)} 
         {...rest} 
-    />
+      />
+    </>
   )
 }
 

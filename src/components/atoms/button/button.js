@@ -5,6 +5,7 @@ const STYLES = [
     'btn-pri',
     'btn-sec',
     'btn-ter',    
+    'btn-plain'
 ]
 
 export const Button = ({children, onClick, type, className}) => {

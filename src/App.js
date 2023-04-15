@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Profiler } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -9,8 +9,9 @@ import './App.css';
 import { PrivateRoute } from './components/atoms/privateRoute/privateRoute';
 import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
+import { Profile } from './pages/profile/profile';
 import { Game } from './pages/game/game';
-import { TestGame } from './games/testgame2';
+import { TestGame } from './games/testgame';
 
 function App() {
   return (
@@ -34,6 +35,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <Game />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
                 </PrivateRoute>
               }
             />

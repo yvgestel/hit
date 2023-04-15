@@ -7,6 +7,9 @@ import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
 import * as THREE from 'three';
 
+import { Icon } from '../components/atoms/icon/icon';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
 import * as tf from '@tensorflow/tfjs'
 import * as posenet from '@tensorflow-models/posenet'
 
@@ -17,6 +20,10 @@ export const TestGame = () => {
     const [prediction, setPrediction] = useState(null);
     const videoRef = useRef(null)
     const canvasRef = useRef(null)
+
+    const goBack = () => {
+      console.log('Go back')
+    }
 
     const detectWebcamFeed = async (posenet_model) => {
         if (
@@ -49,12 +56,12 @@ export const TestGame = () => {
         }, 200);
       };
 
-    useEffect(() => {
-        tf.ready().then(() => {
-        runPosenet();
-        });
-        tf.dispose()
-    }, []);
+    // useEffect(() => {
+    //     tf.ready().then(() => {
+    //     runPosenet();
+    //     });
+    //     tf.dispose()
+    // }, []);
 
     useEffect(() => {
         const color = prediction>0.3 ? '#49be25' : '#be4d25'
@@ -96,22 +103,28 @@ export const TestGame = () => {
 
     return (
         <div className='game-page-container'>
+          <div className='back-from-game-icon'>
+            <Icon 
+              onClick={goBack}
+              icon={faArrowLeft}
+            />
+          </div>
             <canvas 
                 id='game-container'
                 className='game-container'
                 ref={canvasRef}
             />
-        <Webcam 
-            height={screenHeight} 
-            width={screenWidth}
-            videoConstraints={{
-                facingMode: 'user', 
-                aspectRatio: screenRatio,
-                width: screenWidth,
-                height: screenHeight,
-            }}
-            ref={videoRef} 
-        />
+          <Webcam 
+              height={screenHeight} 
+              width={screenWidth}
+              videoConstraints={{
+                  facingMode: 'user', 
+                  aspectRatio: screenRatio,
+                  width: screenWidth,
+                  height: screenHeight,
+              }}
+              ref={videoRef} 
+          />
         </div>
 
     )

@@ -1,0 +1,17 @@
+.icon-container {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 25%;
+    background-color: var(--black);
+    opacity: 0.75;
+}
+
+.icon {
+    padding: 0.75rem 1rem;
+    color: var(--white);
+    font-size: 2rem;
+    color: var(--white);
+}

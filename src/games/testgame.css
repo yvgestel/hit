@@ -17,3 +17,11 @@
     height: 100vh;
     z-index: 9;
   }
+  
+  .back-from-game-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    padding: 1rem;
+  }

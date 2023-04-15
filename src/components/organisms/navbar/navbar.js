@@ -96,10 +96,10 @@ export const Navbar = () => {
                     {
                         user.uid && 
                         <>
-                            <li onClick={logOutUser}>
+                            <li onClick={openOrCloseNav}>
                                 <Link
                                     className='link'
-                                    to='/'
+                                    to='/profile'
                                 >
                                     My profile
                                 </Link>
