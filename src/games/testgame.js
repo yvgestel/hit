@@ -12,7 +12,7 @@ import './testgame.css';
 
 const CAPTURE_OPTIONS = {
     audio: false,
-    video: { facingMode: "environment" },
+    video: { facingMode: "user" },
 };
 
 export const TestGame = () => {
