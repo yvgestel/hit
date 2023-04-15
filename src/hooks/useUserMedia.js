@@ -11,7 +11,7 @@ export function useUserMedia(requestedMedia) {
         setMediaStream(stream);
       } catch(err) {
         // Removed for brevity
-        console.log(err)
+        alert(err)
       }
     }
 
