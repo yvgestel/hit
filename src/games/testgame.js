@@ -56,7 +56,8 @@ export const TestGame = () => {
     }
 
     useEffect(() => {
-    },[])
+        console.log(container)
+    },[container])
 
     return (
         <Measure 
