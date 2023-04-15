@@ -6,7 +6,7 @@ export function useUserMedia(requestedMedia) {
   useEffect(() => {
     async function enableStream() {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true }); //requestedMedia
+        const stream = await navigator.mediaDevices.getUserMedia(requestedMedia); 
         console.log(stream)
         setMediaStream(stream);
       } catch(err) {
