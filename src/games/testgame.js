@@ -11,7 +11,9 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import './testgame.css';
 
 const CAPTURE_OPTIONS = {
-    video: { facingMode: "user" },
+    video: { facingMode: "user",
+    audio: false
+    },
 };
 
 export const TestGame = () => {
