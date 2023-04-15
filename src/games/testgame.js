@@ -36,6 +36,7 @@ export const TestGame = () => {
     }
 
     function handleCanPlay() {
+        console.log(videoRef)
         calculateRatio(videoRef.current.videoHeight, videoRef.current.videoWidth);
         videoRef.current.play();
     }
