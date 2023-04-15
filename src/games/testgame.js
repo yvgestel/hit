@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Measure from 'react-measure'
 import { useUserMedia } from '../hooks/useUserMedia';
 import { useCardRatio } from '../hooks/useCardRatio';
@@ -15,6 +16,7 @@ const CAPTURE_OPTIONS = {
 };
 
 export const TestGame = () => {
+    const navigate = useNavigate()
     const videoRef = useRef(null)
     const canvasRef = useRef(null)
     const mediaStream = useUserMedia(CAPTURE_OPTIONS)
@@ -46,7 +48,13 @@ export const TestGame = () => {
     }
 
     const goBack = () => {
-      console.log('Go back')
+      console.log(window.history)
+      if (window.history.state && window.history.state.idx > 0) {
+        navigate(-1);
+    } else {
+        navigate('/', { replace: true }); 
+        // the current entry in the history stack will be replaced with the new one with { replace: true }
+    }
     }
 
     useEffect(() => {
