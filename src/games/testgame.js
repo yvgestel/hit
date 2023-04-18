@@ -10,17 +10,19 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import './testgame.css';
 
-const CAPTURE_OPTIONS = {
-    video: { facingMode: "user" },
-};
-
 export const TestGame = () => {
+    const [container, setContainer] = useState({ height: 0, width: 0 });
+    const [aspectRatio, calculateRatio] = useCardRatio(1.586);
+
+    const CAPTURE_OPTIONS = {
+        video: {width: container.height, height: container.width}
+    };
+
     const navigate = useNavigate()
     const videoRef = useRef(null)
     const canvasRef = useRef(null)
     const mediaStream = useUserMedia(CAPTURE_OPTIONS)
-    const [container, setContainer] = useState({ height: 0, width: 0 });
-    const [aspectRatio, calculateRatio] = useCardRatio(1.586);
+
     const offsets = useOffsets(
       videoRef.current && videoRef.current.videoWidth,
       videoRef.current && videoRef.current.videoHeight,
@@ -28,19 +30,19 @@ export const TestGame = () => {
       container.height
     );
 
-    console.log(offsets)
-
     if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
         videoRef.current.srcObject = mediaStream;
     }
 
     function handleCanPlay() {
-        console.log(videoRef)
+        console.log('videoRef.current.videoHeight', videoRef.current.videoHeight)
+        console.log('videoRef.current.videoWidth', videoRef.current.videoWidth)
         calculateRatio(videoRef.current.videoHeight, videoRef.current.videoWidth);
         videoRef.current.play();
     }
 
     function handleResize(contentRect) {
+        //console.log(contentRect)
         setContainer({
             height: Math.round(contentRect.bounds.width / aspectRatio),
             width: contentRect.bounds.width
@@ -55,9 +57,10 @@ export const TestGame = () => {
       }
     }
 
-    useEffect(() => {
-        console.log(container)
-    },[container])
+    // useEffect(() => {
+    //     console.log(container)
+    //     console.log(videoRef.current.videoHeight)
+    // },[container])
 
     return (
         <Measure 

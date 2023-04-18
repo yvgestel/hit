@@ -11,7 +11,7 @@ import { Home } from './pages/home/home';
 import { Login } from './pages/login/login';
 import { Profile } from './pages/profile/profile';
 import { Game } from './pages/game/game';
-import { TestGame } from './games/testgame';
+import { TestGame } from './games/testgame3';
 
 function App() {
   return (

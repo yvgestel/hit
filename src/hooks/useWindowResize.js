@@ -20,13 +20,6 @@ function useWindowResize() {
           screenRatio: ratio
         });
 
-        console.log('resize')
-        console.log(window.innerWidth)
-        console.log(window.innerHeight)
-        console.log(window.devicePixelRatio)
-        console.log(isLandscape)
-        console.log(ratio)
-
     }
 
     window.addEventListener("resize", handleResize);
