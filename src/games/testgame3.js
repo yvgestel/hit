@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import useWindowResize from '../hooks/useWindowResize'
-import Measure from 'react-measure'
 import * as THREE from 'three';
 import './testgame.css';
 
 export const TestGame = () => {
     const { screenWidth, screenHeight } = useWindowResize()
-    const [container, setContainer] = useState({ height: 0, width: 0 });
     const videoRef = useRef(null)
     const canvasRef = useRef(null)
 
@@ -40,26 +38,21 @@ export const TestGame = () => {
     // },[])
 
     useEffect(() => {
-        console.log(container)
-        getVideo(container.height, container.width)
-    }, [videoRef,container])
-
-    function handleResize(contentRect) {
-        console.log(contentRect)
-        setContainer({
-            height: contentRect.bounds.height,
-            width: contentRect.bounds.width
-          });
-        
-        // contentRect gebruiken voor resize
-        // -> useWindowResize verbeteren met useCardRatio
-        // useUserMedia / getVideo samenvoegen 
-    }
+        getVideo(screenHeight, screenWidth)
+    }, [videoRef,screenHeight, screenWidth])
 
     return (
-        <div className='test'>
-            <br></br>
-            {screenWidth}*{screenHeight}
+        <div className='game-page-container'>
+            <canvas 
+                id='game-container'
+                className='game-container'
+                ref={canvasRef}
+            />  
+            <video
+                id='video-container'
+                className='video-container'
+                ref={videoRef}
+            /> 
         </div>
     )
 }
