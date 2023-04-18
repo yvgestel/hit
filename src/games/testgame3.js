@@ -11,7 +11,7 @@ export const TestGame = () => {
     const getVideo = (screenHeight, screenWidth) => {
         let video = videoRef.current
         navigator.mediaDevices.getUserMedia({
-            video: {width: screenWidth, height: screenHeight}
+            video: {width: screenWidth, height: 800}
         }).then(stream => {
             video.srcObject = stream
             video.play()
