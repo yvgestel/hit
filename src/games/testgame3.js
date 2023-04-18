@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import './testgame.css';
 
 export const TestGame = () => {
-    const { screenWidth, screenHeight, screenRatio } = useWindowResize()
+    const { screenWidth, screenHeight } = useWindowResize()
     const videoRef = useRef(null)
     const canvasRef = useRef(null)
 
@@ -38,38 +38,35 @@ export const TestGame = () => {
     // },[])
 
     useEffect(() => {
-        //getVideo(screenHeight, screenWidth)
+        getVideo(screenHeight, screenWidth)
     }, [videoRef,screenHeight, screenWidth])
 
-    useEffect(() => {
-        console.log(canvasRef)
-    }, [canvasRef])
-
     return (
-        <div className='game-container' ref={canvasRef}>
-            <br/>
-            <p>Afmetingen</p>
-            <span>Window size: {screenWidth} x {screenHeight}</span>
-            <br />
-            <span>Ratio: {screenRatio}</span>
-            <br/>
-            {canvasRef.current && <span>Ref size: {canvasRef.current.clientWidth} x {canvasRef.current.clientHeight}</span>}
-        </div>
+        <div className='game-page-container'>
+            <canvas 
+                id='game-container'
+                className='game-container'
+                ref={canvasRef}
+            />  
+            <video
+                id='video-container'
+                className='video-container'
+                ref={videoRef}
+            /> 
+        </div> 
     )
 }
 
-{/* <div className='game-page-container'>
-<canvas 
-    id='game-container'
-    className='game-container'
-    ref={canvasRef}
-/>  
-<video
-    id='video-container'
-    className='video-container'
-    ref={videoRef}
-/> 
+{/* <div className='game-container' ref={canvasRef}>
+<br/>
+<p>Afmetingen</p>
+<span>Window size: {screenWidth} x {screenHeight}</span>
+<br />
+<span>Ratio: {screenRatio}</span>
+<br/>
+{canvasRef.current && <span>Ref size: {canvasRef.current.clientWidth} x {canvasRef.current.clientHeight}</span>}
 </div> */}
+
 
 {/* <Measure 
 bounds 
