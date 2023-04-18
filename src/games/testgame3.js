@@ -11,7 +11,7 @@ export const TestGame = () => {
     const getVideo = (screenHeight, screenWidth) => {
         let video = videoRef.current
         navigator.mediaDevices.getUserMedia({
-            video: {width: screenWidth, height: 800}
+            video: {width: screenWidth, height: screenHeight}
         }).then(stream => {
             video.srcObject = stream
             video.play()
@@ -43,6 +43,7 @@ export const TestGame = () => {
 
     return (
         <div className='game-page-container'>
+            {canvasRef.current && <span>Ref size: {canvasRef.current.clientWidth} x {canvasRef.current.clientHeight}</span>}
             <canvas 
                 id='game-container'
                 className='game-container'
