@@ -38,7 +38,7 @@ export const TestGame = () => {
     // },[])
 
     useEffect(() => {
-        getVideo(screenHeight, screenWidth)
+        //getVideo(screenHeight, screenWidth)
     }, [videoRef,screenHeight, screenWidth])
 
     useEffect(() => {
@@ -53,7 +53,7 @@ export const TestGame = () => {
             <br />
             <span>Ratio: {screenRatio}</span>
             <br/>
-            <span>Ref size: {canvasRef.current.clientWidth} x {canvasRef.current.clientHeight}</span>
+            {canvasRef.current && <span>Ref size: {canvasRef.current.clientWidth} x {canvasRef.current.clientHeight}</span>}
         </div>
     )
 }
