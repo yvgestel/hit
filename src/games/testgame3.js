@@ -42,54 +42,21 @@ export const TestGame = () => {
     }, [videoRef,screenHeight, screenWidth])
 
     return (
-        <>
-        {canvasRef.current && <span>Ref size: {canvasRef.current.clientWidth} x {canvasRef.current.clientHeight}</span>}
         <div className='game-page-container'>
             <canvas 
-                id='game-container'
+                //id='game-container'
                 className='game-container'
                 ref={canvasRef}
             />  
-            <video
-                id='video-container'
-                className='video-container'
-                ref={videoRef}
-            /> 
+            <div className='video-container'>
+                <video
+                    //id='video-container'
+                    className='video-source'
+                    ref={videoRef}
+                /> 
+            </div>
         </div> 
-        </>
     )
 }
 
-{/* <div className='game-container' ref={canvasRef}>
-<br/>
-<p>Afmetingen</p>
-<span>Window size: {screenWidth} x {screenHeight}</span>
-<br />
-<span>Ratio: {screenRatio}</span>
-<br/>
-{canvasRef.current && <span>Ref size: {canvasRef.current.clientWidth} x {canvasRef.current.clientHeight}</span>}
-</div> */}
 
-
-{/* <Measure 
-bounds 
-onResize={handleResize}
->
-{({measureRef}) => (
-    <div 
-        className='game-page-container'
-        ref={measureRef}
-    >
-        <canvas 
-            id='game-container'
-            className='game-container'
-            ref={canvasRef}
-        />  
-        <video
-            id='video-container'
-            className='video-container'
-            ref={videoRef}
-        /> 
-    </div>
-)}
-</Measure> */}
