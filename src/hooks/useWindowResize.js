@@ -20,6 +20,7 @@ function useWindowResize() {
           screenRatio: ratio
         });
 
+      alert(isLandscape)
     }
 
     window.addEventListener("resize", handleResize);
