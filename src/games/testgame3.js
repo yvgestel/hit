@@ -42,8 +42,9 @@ export const TestGame = () => {
     }, [videoRef,screenHeight, screenWidth])
 
     return (
+        <>
+        {canvasRef.current && <span>Ref size: {canvasRef.current.clientWidth} x {canvasRef.current.clientHeight}</span>}
         <div className='game-page-container'>
-            {canvasRef.current && <span>Ref size: {canvasRef.current.clientWidth} x {canvasRef.current.clientHeight}</span>}
             <canvas 
                 id='game-container'
                 className='game-container'
@@ -55,6 +56,7 @@ export const TestGame = () => {
                 ref={videoRef}
             /> 
         </div> 
+        </>
     )
 }
 
