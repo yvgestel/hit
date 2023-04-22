@@ -12,8 +12,9 @@ export const TestGame = () => {
         let video = videoRef.current
         navigator.mediaDevices.getUserMedia({
             video: {
-                width: screenWidth, 
-                height: screenHeight,
+                // width: screenWidth, 
+                // height: screenHeight,
+                video: true,
                 audio: false,
                 facingMode: 'user',
             }
