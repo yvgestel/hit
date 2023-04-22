@@ -16,8 +16,6 @@
 
   .game-container {
     position: absolute;
-    background-color: orange;
-    opacity: 10%;
     left: 0;
     top: 0;
     width: 100%;

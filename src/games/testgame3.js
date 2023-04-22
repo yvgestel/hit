@@ -12,9 +12,8 @@ export const TestGame = () => {
         let video = videoRef.current
         navigator.mediaDevices.getUserMedia({
             video: {
-                // width: screenWidth, 
-                // height: screenHeight,
-                video: true,
+                width: {ideal: screenWidth },
+                height: {ideal: screenHeight },
                 audio: false,
                 facingMode: 'user',
             }
@@ -22,7 +21,7 @@ export const TestGame = () => {
             video.srcObject = stream
             video.play()
         }).catch(err => {
-            console.error(err)
+            alert(err)
         })
     }
 
