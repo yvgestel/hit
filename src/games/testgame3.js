@@ -58,6 +58,9 @@ export const TestGame = () => {
                     //id='video-container'
                     className='video-source'
                     ref={videoRef}
+                    autoPlay
+                    playsInline
+                    muted
                 /> 
             </div>
         </div> 
