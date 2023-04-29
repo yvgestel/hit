@@ -7,7 +7,6 @@ export function useCardRatio(initialRatio) {
     if (height && width) {
       const isLandscape = height <= width;
       const ratio = isLandscape ? width / height : height / width;
-      //console.log(isLandscape)
       setAspectRatio(ratio);
     }
   }, []);
