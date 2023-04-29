@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function useWindowResize() {
+export function useWindowResize() {
   const [windowSize, setWindowSize] = useState({
     screenWidth: window.innerWidth,
     screenHeight: window.innerHeight,
@@ -19,8 +19,6 @@ function useWindowResize() {
           screenHeight: window.innerHeight,
           screenRatio: ratio
         });
-
-      
     }
 
     window.addEventListener("resize", handleResize);
@@ -33,4 +31,3 @@ function useWindowResize() {
   return windowSize;
 }
 
-export default useWindowResize;
