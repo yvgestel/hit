@@ -14,7 +14,7 @@ export const TestGame = () => {
     const canvasRef = useRef(null)
 
     const getVideo = async (aspectRatio) => {
-        console.log(aspectRatio)
+        alert(aspectRatio)
         try {
             let video = videoRef.current
             let stream = await navigator.mediaDevices.getUserMedia({
@@ -40,7 +40,6 @@ export const TestGame = () => {
     }
 
     useEffect(() => {
-        console.log('Ratio')
         calculateRatio(screenHeight, screenWidth)
     }, [screenHeight, screenWidth])
 
