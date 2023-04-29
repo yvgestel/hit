@@ -12,7 +12,6 @@ export const TestGame = () => {
     const canvasRef = useRef(null)
 
     const getVideo = async () => {
-        alert(screenRatio)
         try {
             let video = videoRef.current
             let stream = await navigator.mediaDevices.getUserMedia({
