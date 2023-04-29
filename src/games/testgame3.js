@@ -5,16 +5,13 @@ import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
 import './testgame.css';
-import { useCardRatio } from '../hooks/useCardRatio';
 
 export const TestGame = () => {
-    const { screenWidth, screenHeight } = useWindowResize()
-    const [ aspectRatio, calculateRatio ] = useCardRatio()
+    const { screenWidth, screenHeight, screenRatio } = useWindowResize()
     const videoRef = useRef(null)
     const canvasRef = useRef(null)
 
-    const getVideo = async (aspectRatio) => {
-        alert(aspectRatio)
+    const getVideo = async () => {
         try {
             let video = videoRef.current
             let stream = await navigator.mediaDevices.getUserMedia({
@@ -25,7 +22,7 @@ export const TestGame = () => {
                         whiteBalance: 'continuous',
                         zoom: 0,
                         focusDepth: 0,
-                        aspectRatio: aspectRatio,
+                        aspectRatio: screenRatio,
                         // width: {ideal: screenWidth },
                         // height: {ideal: screenHeight },
                         video: true,
@@ -39,13 +36,11 @@ export const TestGame = () => {
         }
     }
 
-    useEffect(() => {
-        calculateRatio(screenHeight, screenWidth)
-    }, [screenHeight, screenWidth])
+
 
     useEffect(() => {
-        getVideo(aspectRatio)
-    }, [videoRef,aspectRatio])
+        getVideo()
+    }, [videoRef,screenRatio])
 
 
     return (
