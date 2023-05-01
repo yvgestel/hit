@@ -37,6 +37,15 @@ export const TestGame = () => {
 
     const mediaStream = useUserMedia(CAPTURE_OPTIONS)
 
+    if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
+        videoRef.current.srcObject = mediaStream;
+        videoRef.current.play();
+    }
+
+    function handleCanPlay() {
+        videoRef.current.play();
+    }
+
     // const getVideo = async () => {
     //     try {
     //         let video = videoRef.current
@@ -67,14 +76,12 @@ export const TestGame = () => {
     //     getVideo()
     // }, [videoRef,screenRatio])
 
-    useEffect(() => {
-        // console.log('useEffect')
-        // console.log(mediaStream)
-        if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
-            videoRef.current.srcObject = mediaStream;
-            videoRef.current.play();
-        }
-    }, [videoRef,screenRatio,mediaStream])
+    // useEffect(() => {
+    //     if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
+    //         videoRef.current.srcObject = mediaStream;
+    //         videoRef.current.play();
+    //     }
+    // }, [videoRef,screenRatio,mediaStream])
 
     const goBack = () => {
         try {
@@ -102,6 +109,7 @@ export const TestGame = () => {
                     id='video-container'
                     className='video-source'
                     ref={videoRef}
+                    onCanPlay={handleCanPlay}
                     autoPlay
                     playsInline
                     muted
