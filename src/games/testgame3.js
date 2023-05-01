@@ -19,23 +19,23 @@ export const TestGame = () => {
     const canvasRef = useRef(null)
     const navigate = useNavigate()
 
-    const CAPTURE_OPTIONS = {
-        video: {
-            facingMode: {exact: 'user'},
-            autoFocus: 'continuous',
-            flashMode: 'off',
-            whiteBalance: 'continuous',
-            zoom: 0,
-            focusDepth: 0,
-            aspectRatio: screenRatio,
-            // width: {ideal: screenWidth },
-            // height: {ideal: screenHeight },
-            video: true,
-            audio: false,
-        }
-    };
+    // const CAPTURE_OPTIONS = {
+    //     video: {
+    //         facingMode: {exact: 'user'},
+    //         autoFocus: 'continuous',
+    //         flashMode: 'off',
+    //         whiteBalance: 'continuous',
+    //         zoom: 0,
+    //         focusDepth: 0,
+    //         aspectRatio: screenRatio,
+    //         // width: {ideal: screenWidth },
+    //         // height: {ideal: screenHeight },
+    //         video: true,
+    //         audio: false,
+    //     }
+    // };
 
-    const mediaStream = useUserMedia(CAPTURE_OPTIONS)
+    // const mediaStream = useUserMedia(CAPTURE_OPTIONS)
 
     const getVideo = async () => {
         try {
@@ -62,16 +62,16 @@ export const TestGame = () => {
         }
     }
 
-    // useEffect(() => {
-    //     getVideo()
-    // }, [videoRef,screenRatio])
-
     useEffect(() => {
-        if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
-            videoRef.current.srcObject = mediaStream;
-            videoRef.current.play();
-        }
-    }, [videoRef,screenRatio,mediaStream])
+        getVideo()
+    }, [videoRef,screenRatio])
+
+    // useEffect(() => {
+    //     if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
+    //         videoRef.current.srcObject = mediaStream;
+    //         videoRef.current.play();
+    //     }
+    // }, [videoRef,screenRatio,mediaStream])
 
     const goBack = () => {
         try {
