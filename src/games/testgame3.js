@@ -1,15 +1,41 @@
 import React, { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useWindowResize }from '../hooks/useWindowResize'
+import { useUserMedia } from '../hooks/useUserMedia';
+
+import './testgame.css';
+
+import { Icon } from '../components/atoms/icon/icon';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+
 import * as THREE from 'three';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry'
 import { Line2 } from 'three/examples/jsm/lines/Line2'
-import './testgame.css';
 
 export const TestGame = () => {
-    const { screenWidth, screenHeight, screenRatio } = useWindowResize()
+    const { screenRatio } = useWindowResize()
     const videoRef = useRef(null)
     const canvasRef = useRef(null)
+    const navigate = useNavigate()
+
+    const CAPTURE_OPTIONS = {
+        video: {
+            facingMode: {exact: 'user'},
+            autoFocus: 'continuous',
+            flashMode: 'off',
+            whiteBalance: 'continuous',
+            zoom: 0,
+            focusDepth: 0,
+            aspectRatio: screenRatio,
+            // width: {ideal: screenWidth },
+            // height: {ideal: screenHeight },
+            video: true,
+            audio: false,
+        }
+    };
+
+    const mediaStream = useUserMedia(CAPTURE_OPTIONS)
 
     const getVideo = async () => {
         try {
@@ -36,15 +62,33 @@ export const TestGame = () => {
         }
     }
 
-
+    // useEffect(() => {
+    //     getVideo()
+    // }, [videoRef,screenRatio])
 
     useEffect(() => {
-        getVideo()
-    }, [videoRef,screenRatio])
+        if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
+            videoRef.current.srcObject = mediaStream;
+            videoRef.current.play();
+        }
+    }, [videoRef,screenRatio,mediaStream])
 
+    const goBack = () => {
+        try {
+          navigate(-1)
+        } catch (error) {
+          navigate('/', { replace: true }); 
+        }
+      }
 
     return (
         <div className='game-page-container'>
+            <div className='back-from-game-icon'>
+                <Icon 
+                    onClick={goBack}
+                    icon={faArrowLeft}
+                />
+            </div>
             <canvas 
                 id='game-container'
                 className='game-container'
