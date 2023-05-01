@@ -21,7 +21,7 @@ export const TestGame = () => {
 
     const CAPTURE_OPTIONS = {
         video: {
-            facingMode: {exact: 'user'},
+            facingMode: 'user',
             autoFocus: 'continuous',
             flashMode: 'off',
             whiteBalance: 'continuous',
