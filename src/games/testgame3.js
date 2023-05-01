@@ -63,6 +63,7 @@ export const TestGame = () => {
     }
 
     useEffect(() => {
+        alert(screenRatio)
         getVideo()
     }, [videoRef,screenRatio])
 
