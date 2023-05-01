@@ -38,8 +38,9 @@ export const TestGame = () => {
     const mediaStream = useUserMedia(CAPTURE_OPTIONS)
 
     if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
+        console.log('mediastream', mediaStream)
         videoRef.current.srcObject = mediaStream;
-        videoRef.current.play();
+        // videoRef.current.play();
     }
 
     function handleCanPlay() {

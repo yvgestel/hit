@@ -15,13 +15,10 @@ export function useUserMedia(requestedMedia) {
     }
 
     if (!mediaStream) {
-      // console.log('Not mediastream')
       enableStream();
     } else {
       return function cleanup() {
         mediaStream.getTracks().forEach(track => {
-          // console.log('Cleanup')
-          // console.log(track)
           track.stop();
         });
       }
