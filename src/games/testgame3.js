@@ -19,60 +19,62 @@ export const TestGame = () => {
     const canvasRef = useRef(null)
     const navigate = useNavigate()
 
-    // const CAPTURE_OPTIONS = {
-    //     video: {
-    //         facingMode: {exact: 'user'},
-    //         autoFocus: 'continuous',
-    //         flashMode: 'off',
-    //         whiteBalance: 'continuous',
-    //         zoom: 0,
-    //         focusDepth: 0,
-    //         aspectRatio: screenRatio,
-    //         // width: {ideal: screenWidth },
-    //         // height: {ideal: screenHeight },
-    //         video: true,
-    //         audio: false,
-    //     }
-    // };
-
-    // const mediaStream = useUserMedia(CAPTURE_OPTIONS)
-
-    const getVideo = async () => {
-        try {
-            let video = videoRef.current
-            let stream = await navigator.mediaDevices.getUserMedia({
-                    video: {
-                        facingMode: {exact: 'user'},
-                        autoFocus: 'continuous',
-                        flashMode: 'off',
-                        whiteBalance: 'continuous',
-                        zoom: 0,
-                        focusDepth: 0,
-                        aspectRatio: screenRatio,
-                        // width: {ideal: screenWidth },
-                        // height: {ideal: screenHeight },
-                        video: true,
-                        audio: false,
-                    }
-                })
-            video.srcObject = stream
-            video.play()
-        } catch (error) {
-            alert(error)
+    const CAPTURE_OPTIONS = {
+        video: {
+            facingMode: {exact: 'user'},
+            autoFocus: 'continuous',
+            flashMode: 'off',
+            whiteBalance: 'continuous',
+            zoom: 0,
+            focusDepth: 0,
+            aspectRatio: screenRatio,
+            // width: {ideal: screenWidth },
+            // height: {ideal: screenHeight },
+            video: true,
+            audio: false,
         }
-    }
+    };
 
-    useEffect(() => {
-        alert(screenRatio)
-        getVideo()
-    }, [videoRef,screenRatio])
+    const mediaStream = useUserMedia(CAPTURE_OPTIONS)
+
+    // const getVideo = async () => {
+    //     try {
+    //         let video = videoRef.current
+    //         let stream = await navigator.mediaDevices.getUserMedia({
+    //                 video: {
+    //                     facingMode: {exact: 'user'},
+    //                     autoFocus: 'continuous',
+    //                     flashMode: 'off',
+    //                     whiteBalance: 'continuous',
+    //                     zoom: 0,
+    //                     focusDepth: 0,
+    //                     aspectRatio: screenRatio,
+    //                     // width: {ideal: screenWidth },
+    //                     // height: {ideal: screenHeight },
+    //                     video: true,
+    //                     audio: false,
+    //                 }
+    //             })
+    //         video.srcObject = stream
+    //         video.play()
+    //     } catch (error) {
+    //         alert(error)
+    //     }
+    // }
 
     // useEffect(() => {
-    //     if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
-    //         videoRef.current.srcObject = mediaStream;
-    //         videoRef.current.play();
-    //     }
-    // }, [videoRef,screenRatio,mediaStream])
+    //     alert(screenRatio)
+    //     getVideo()
+    // }, [videoRef,screenRatio])
+
+    useEffect(() => {
+        // console.log('useEffect')
+        // console.log(mediaStream)
+        if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
+            videoRef.current.srcObject = mediaStream;
+            videoRef.current.play();
+        }
+    }, [videoRef,screenRatio,mediaStream])
 
     const goBack = () => {
         try {
